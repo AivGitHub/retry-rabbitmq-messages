@@ -18,7 +18,7 @@ from dotenv import dotenv_values, find_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CORE_ENV_FILE = os.environ.get('KN_ENV_FILE', '.env')
+CORE_ENV_FILE = os.environ.get('CORE_ENV_FILE', '.env')
 
 
 if not find_dotenv(CORE_ENV_FILE):
