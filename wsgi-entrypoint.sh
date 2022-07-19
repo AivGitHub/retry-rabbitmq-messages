@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 
-uwsgi --ini internal/config/server.ini
+uwsgi --ini internal/uwsgi/settings/server.ini
