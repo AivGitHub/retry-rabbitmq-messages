@@ -9,6 +9,8 @@
 
 # Doc files
 docs/
+README.nd
+LICENSE.txt
 
 # Static files
 # Will be collected with ./manage.py collectstatic
