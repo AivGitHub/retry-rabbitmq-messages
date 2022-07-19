@@ -1,9 +1,22 @@
 version: "3.3"
 
 services:
+  nginx:
+    container_name: nginx
+    build: internal/nginx
+    ports:
+      - 80:80
+    volumes:
+      - core:/www
+
   core:
     container_name: core
     build: .
     command: bash entrypoint.sh
-    ports:
-      - 8000:8000
+    volumes:
+      - core:/www
+    depends_on:
+      - nginx
+
+volumes:
+  core:
