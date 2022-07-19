@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from typing import Any
 
 from dotenv import dotenv_values, find_dotenv
 
@@ -28,12 +29,12 @@ if not find_dotenv(CORE_ENV_FILE):
 CORE_ENV_DICT = dotenv_values(CORE_ENV_FILE)
 
 
-def get_env_value(key, to_list=False, splitter=None):
+def get_env_value(key, to_list=False, splitter=None, cast_to: Any = str):
     if to_list and not splitter:
         raise RuntimeError('Specify splitter if you specify to_list')
 
     try:
-        return os.environ[key]
+        return cast_to(os.environ[key])
     except KeyError:
         pass
 
@@ -43,9 +44,9 @@ def get_env_value(key, to_list=False, splitter=None):
         raise RuntimeError('Key %s should be defined in environ' % key)
 
     if to_list and splitter:
-        return [_value.strip() for _value in value.split(splitter) if _value]
+        return [cast_to(_value.strip()) for _value in value.split(splitter) if _value]
 
-    return value
+    return cast_to(value)
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,7 +56,7 @@ def get_env_value(key, to_list=False, splitter=None):
 SECRET_KEY = get_env_value('CORE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_env_value('CORE_DEBUG')
+DEBUG = get_env_value('CORE_DEBUG', cast_to=bool)
 
 ALLOWED_HOSTS = get_env_value('CORE_ALLOWED_HOSTS', to_list=True, splitter=',')
 
