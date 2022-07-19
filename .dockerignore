@@ -1,0 +1,15 @@
+# Environments
+.venv/
+
+# git
+.git/
+
+# JetBrains
+.idea/
+
+# Doc files
+docs/
+
+# Static files
+# Will be collected with ./manage.py collectstatic
+static/

@@ -90,13 +90,15 @@ with the next variables:
 (caution: without [mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html)) run `./manage.py runserver`
 2. To run in production with
 [mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) run `bash wsgi-entrypoint.sh`
+3. To run in
+[docker](https://docs.docker.com/engine/reference/commandline/compose_up/) container run `docker-compose up`
 
 ## Roadmap
 
 * [x] Run [Django](https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/uwsgi/) application in production mod
 * [] Add [RabbitMQ](https://www.rabbitmq.com/) with exponential time retries
 * [] Add [Nginx](https://www.nginx.com//) to serve static/media files
-* [] Add [Docker](https://www.docker.com/) container.
+* [x] Add [Docker](https://www.docker.com/) container.
 To be honest I'm not the fan of dockers,
 I prefer full isolation like [dedicated server](https://en.wikipedia.org/wiki/Dedicated_hosting_service) or
 [VirtualBox](https://www.virtualbox.org/) at least
