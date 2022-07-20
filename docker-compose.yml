@@ -12,7 +12,7 @@ services:
   core:
     container_name: core
     build: .
-    command: bash entrypoint.sh
+    command: bash bin/entrypoint.sh
     volumes:
       - core:/www
     depends_on:

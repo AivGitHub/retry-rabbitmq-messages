@@ -63,7 +63,7 @@ and n is an amount of retries
 1. [Python](https://www.python.org/) >= 3.8.10
 2. You have [RabbitMQ](https://www.rabbitmq.com/download.html) running,
 if not run it with
-[`bash`](https://www.gnu.org/software/bash/) [`run_rabbitmq.sh`](run_rabbitmq.sh) in separate console
+[`bash`](https://www.gnu.org/software/bash/) `bin/`[`run_rabbitmq.sh`](run_rabbitmq.sh) in separate console
 3. Create [`.env`](https://docs.docker.com/compose/env-file/) file or
 add path to file in `CORE_ENV_FILE` [environ](https://wiki.archlinux.org/title/environment_variables)
 with the next variables:
@@ -89,7 +89,7 @@ with the next variables:
 1. To run in dev mod
 (caution: without [mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html)) run `./manage.py runserver`
 2. To run in production with
-[mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) run `bash wsgi-entrypoint.sh`
+[mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) run `bash bin/entrypoint.sh`
 3. To run in
 [docker](https://docs.docker.com/engine/reference/commandline/compose_up/) container run `docker-compose up`.\
 Runs Django application, Nginx in Docker
