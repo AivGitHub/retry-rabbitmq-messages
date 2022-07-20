@@ -3,6 +3,7 @@
 
 # git
 .git/
+**/.gitkeep
 
 # JetBrains
 .idea/

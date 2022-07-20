@@ -63,18 +63,28 @@ and n is an amount of retries
 1. [Python](https://www.python.org/) >= 3.8.10
 2. You have [RabbitMQ](https://www.rabbitmq.com/download.html) running,
 if not run it with
-[`bash`](https://www.gnu.org/software/bash/) `bin/`[`run_rabbitmq.sh`](run_rabbitmq.sh) in separate console
+[`bash`](https://www.gnu.org/software/bash/) `bin/`[`run_rabbitmq.sh`](bin/run_rabbitmq.sh) in separate console
 3. Create [`.env`](https://docs.docker.com/compose/env-file/) file or
 add path to file in `CORE_ENV_FILE` [environ](https://wiki.archlinux.org/title/environment_variables)
 with the next variables:
-   - `CORE_SECRET_KEY='some_secret_value'`,
-   it is a [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key) SECRET_KEY
-   - `CORE_DEBUG=False`, it is a [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#debug) DEBUG.
-   False to production
-   - `CORE_ALLOWED_HOSTS='localhost,192.168.1.0'`,
-   it is a [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#allowed-hosts) ALLOWED_HOSTS
-   - `CORE_AMQP_URL='localhost:5432'`,
-   it is a host of RabbitMQ server
+    - `CORE_SECRET_KEY='some_secret_value'`,
+    it is a [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key) SECRET_KEY
+    - `CORE_DEBUG=False`, it is a [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#debug) DEBUG.
+    False to production
+    - `CORE_ALLOWED_HOSTS='localhost,192.168.1.0'`,
+    it is a [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#allowed-hosts) ALLOWED_HOSTS
+    - `CORE_AMQP_URL='localhost:5432'`,
+    it is a host of RabbitMQ server
+4. [Nginx](https://www.nginx.com/) configuration:
+    - Generate self-signed certificates for nginx with
+    [`bash`](https://www.gnu.org/software/bash/) [`bin/generate_certificates.sh`](bin/generate_certificates.sh)
+    - or add existing certificates in [internal/nginx/settings/certificates/](internal/nginx/settings/certificates/)
+    wih names `server.crt` and `server.key`
+    - or change `ssl_certificate` and `ssl_certificate_key` as you want
+    - if you don't want to use ssl:
+      - remove [this file](internal/nginx/settings/sites-available/ssl.core.nginx.conf)
+      - comment line `return 302           https://$server_name$request_uri;`
+      in [this file](internal/nginx/settings/sites-available/core.nginx.conf)
 
 ### Installation
 
@@ -86,10 +96,11 @@ with the next variables:
 
 ## Usage
 
-1. To run in dev mod
+1. To run in development mod
 (caution: without [mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html)) run `./manage.py runserver`
 2. To run in production with
-[mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) run `bash bin/entrypoint.sh`
+[mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) run
+[`bash`](https://www.gnu.org/software/bash/) [`bin/entrypoint.sh`](bin/entrypoint.sh)
 3. To run in
 [docker](https://docs.docker.com/engine/reference/commandline/compose_up/) container run `docker-compose up`.\
 Runs Django application, Nginx in Docker
@@ -98,7 +109,8 @@ Runs Django application, Nginx in Docker
 
 * [x] Run [Django](https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/uwsgi/) application in production mod
 * [] Add [RabbitMQ](https://www.rabbitmq.com/) with exponential time retries
-* [x] Add [Nginx](https://www.nginx.com//) to serve static/media files
+* [x] Add [Nginx](https://www.nginx.com/) to serve static/media files
+* [x] [Set up HTTPS Server](https://docs.nginx.com/nginx/admin-guide/security-controls/terminating-ssl-http/)
 * [x] Add [Docker](https://www.docker.com/) container.
 To be honest I'm not the fan of dockers,
 I prefer full isolation like [dedicated server](https://en.wikipedia.org/wiki/Dedicated_hosting_service) or
@@ -108,8 +120,8 @@ I prefer full isolation like [dedicated server](https://en.wikipedia.org/wiki/De
 
 1. Fork the Project
 2. Open a Pull Request
-3. Or just read
-[here: contributing to projects](https://docs.github.com/en/get-started/quickstart/contributing-to-projects)
+3. Or just read here:
+[contributing to projects](https://docs.github.com/en/get-started/quickstart/contributing-to-projects)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

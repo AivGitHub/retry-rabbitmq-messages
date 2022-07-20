@@ -6,6 +6,7 @@ services:
     build: internal/nginx
     ports:
       - 80:80
+      - 443:443
     volumes:
       - core:/www
 
