@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import ast
 import os
 from pathlib import Path
 from typing import Any
@@ -56,7 +57,7 @@ def get_env_value(key, to_list=False, splitter=None, cast_to: Any = str):
 SECRET_KEY = get_env_value('CORE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_env_value('CORE_DEBUG', cast_to=bool)
+DEBUG = get_env_value('CORE_DEBUG', cast_to=ast.literal_eval)
 
 ALLOWED_HOSTS = get_env_value('CORE_ALLOWED_HOSTS', to_list=True, splitter=',')
 
